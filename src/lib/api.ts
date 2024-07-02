@@ -74,7 +74,7 @@ class ApiClient {
     return (await response.json()).data;
   }
 
-  async pauseUserSession(userId: string): Promise<SessionCrudInfo> {
+  async togglePauseUserSession(userId: string): Promise<SessionCrudInfo> {
     const response = await fetch(`${this.rootPath}/api/pause/${userId}`, {
       method: "POST",
       headers: {
@@ -127,6 +127,8 @@ export interface Session {
   goal: string;
   paused: boolean;
   completed: boolean;
+
+  work: string;
 }
 
 export interface Status {

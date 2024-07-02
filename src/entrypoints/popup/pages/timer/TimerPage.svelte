@@ -29,9 +29,15 @@
       {session?.remaining} minutes
     </h2>
 
+    <i class="text-lg">{session?.work}</i>
+    <i class="text-lg"><b>Goal:</b> {session?.goal}</i>
+
     <div class="flex gap-2 my-2">
       <Button
         class="text-mantle {session?.paused ? 'bg-green' : 'bg-surface0'}"
+        onClick={() => {
+          apiClient?.togglePauseUserSession(slackIdRetrieved);
+        }}
       >
         {#if session?.paused}
           <Play size="1.5rem" />
