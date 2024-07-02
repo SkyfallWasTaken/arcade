@@ -39,7 +39,7 @@
 <div class="flex flex-col gap-2 p-4">
   <h2 class="text-4xl font-black">Settings</h2>
 
-  <div>
+  <div class="flex flex-col gap-2 mb-2">
     <label for="apiKey" class="font-medium">
       <p>API Key</p>
       <p class="text-subtext0">
@@ -61,7 +61,7 @@
     {/if}
   </div>
 
-  <div>
+  <div class="flex flex-col gap-2 mb-2">
     <label for="apiKey" class="font-medium">
       <p>Slack ID</p>
       <p class="text-subtext0">
