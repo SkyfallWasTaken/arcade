@@ -24,7 +24,9 @@
 <div class="flex flex-col gap-2 py-4 justify-center items-center">
   <h1 class="text-3xl font-bold shadow-sm">Timer</h1>
 
-  {#await apiClient?.getLatestUserSession(slackIdRetrieved) then session}
+  {#await apiClient?.getLatestUserSession(slackIdRetrieved)}
+    <p class="text-surface0">Loading...</p>
+  {:then session}
     <h2 class="text-5xl font-black">
       {session?.remaining} minutes
     </h2>
