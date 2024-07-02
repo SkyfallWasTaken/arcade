@@ -1,10 +1,14 @@
 <script lang="ts">
-  import { Timer } from "lucide-svelte";
+  import { Settings, Timer } from "lucide-svelte";
   import Button from "./Button.svelte";
+  export let page: "timer" | "settings" = "timer";
 </script>
 
-<div class="bg-surface0 w-1/5 h-full flex flex-col gap-2">
-  <Button>
+<div class="bg-surface0 w-[4rem] h-full flex flex-col">
+  <Button onClick={() => (page = "timer")}>
     <Timer size="1.5rem" />
+  </Button>
+  <Button onClick={() => (page = "settings")}>
+    <Settings size="1.5rem" />
   </Button>
 </div>

@@ -8,7 +8,7 @@
 
   <h2 class="text-6xl font-black">00:00</h2>
 
-  <div class="flex gap-2">
+  <div class="flex gap-2 my-2">
     <Button class="text-mantle bg-green">
       <Play size="1.5rem" />
     </Button>
