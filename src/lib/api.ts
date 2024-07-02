@@ -38,6 +38,49 @@ export default class {
     const response = await fetch(`${this.rootPath}/api/history/${userId}`);
     return (await response.json()).data;
   }
+
+  async startUserSession(
+    userId: string,
+    work: string
+  ): Promise<SessionCrudInfo> {
+    const response = await fetch(`${this.rootPath}/api/start/${userId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.apiKey}`,
+      },
+      body: JSON.stringify({ work }),
+    });
+    return (await response.json()).data;
+  }
+
+  async pauseUserSession(userId: string): Promise<SessionCrudInfo> {
+    const response = await fetch(`${this.rootPath}/api/pause/${userId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.apiKey}`,
+      },
+    });
+    return (await response.json()).data;
+  }
+
+  async cancelUserSession(userId: string): Promise<SessionCrudInfo> {
+    const response = await fetch(`${this.rootPath}/api/cancel/${userId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.apiKey}`,
+      },
+    });
+    return (await response.json()).data;
+  }
+}
+
+export interface SessionCrudInfo {
+  id: string;
+  slackId: string;
+  createdAt: string;
 }
 
 export interface Goal {
