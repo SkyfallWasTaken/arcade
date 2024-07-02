@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Play } from "lucide-svelte";
+  import { Pause, Play } from "lucide-svelte";
   import Button from "./Button.svelte";
   import { ApiClient } from "../../../../lib/api";
   import { slackId, apiKey } from "../../../../lib/settings";
@@ -28,11 +28,17 @@
     <h2 class="text-5xl font-black">
       {session?.remaining} minutes
     </h2>
-  {/await}
 
-  <div class="flex gap-2 my-2">
-    <Button class="text-mantle bg-green">
-      <Play size="1.5rem" />
-    </Button>
-  </div>
+    <div class="flex gap-2 my-2">
+      <Button
+        class="text-mantle {session?.paused ? 'bg-green' : 'bg-surface0'}"
+      >
+        {#if session?.paused}
+          <Play size="1.5rem" />
+        {:else}
+          <Pause size="1.5rem" />
+        {/if}
+      </Button>
+    </div>
+  {/await}
 </div>
