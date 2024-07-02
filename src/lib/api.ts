@@ -1,4 +1,7 @@
-export default class {
+import { writable } from "svelte/store";
+import { apiKey, apiKey } from "./settings";
+
+class ApiClient {
   private apiKey: string;
   rootPath = "https://hackhour.hackclub.com";
 
@@ -76,6 +79,10 @@ export default class {
     return (await response.json()).data;
   }
 }
+
+const apiKeyRetrieved = await apiKey.get();
+const apiClient = writable(new ApiClient(apiKeyRetrieved));
+export default { apiClient };
 
 export interface SessionCrudInfo {
   id: string;
