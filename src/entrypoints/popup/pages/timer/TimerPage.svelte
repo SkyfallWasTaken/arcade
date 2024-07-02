@@ -24,29 +24,31 @@
 <div class="flex flex-col gap-2 py-4 justify-center items-center">
   <h1 class="text-3xl font-bold shadow-sm">Timer</h1>
 
-  {#await apiClient?.getLatestUserSession(slackIdRetrieved)}
-    <p class="text-surface0">Loading...</p>
-  {:then session}
-    <h2 class="text-5xl font-black">
-      {session?.remaining} minutes
-    </h2>
+  {#if apiClient}
+    {#await apiClient?.getLatestUserSession(slackIdRetrieved)}
+      <p class="text-lg">Loading...</p>
+    {:then session}
+      <h2 class="text-5xl font-black">
+        {session?.remaining} minutes
+      </h2>
 
-    <i class="text-lg">{session?.work}</i>
-    <i class="text-lg"><b>Goal:</b> {session?.goal}</i>
+      <i class="text-lg">{session?.work}</i>
+      <i class="text-lg"><b>Goal:</b> {session?.goal}</i>
 
-    <div class="flex gap-2 my-2">
-      <Button
-        class="text-mantle {session?.paused ? 'bg-green' : 'bg-surface0'}"
-        onClick={() => {
-          apiClient?.togglePauseUserSession(slackIdRetrieved);
-        }}
-      >
-        {#if session?.paused}
-          <Play size="1.5rem" />
-        {:else}
-          <Pause size="1.5rem" />
-        {/if}
-      </Button>
-    </div>
-  {/await}
+      <div class="flex gap-2 my-2">
+        <Button
+          class="text-mantle {session?.paused ? 'bg-green' : 'bg-surface0'}"
+          onClick={() => {
+            apiClient?.togglePauseUserSession(slackIdRetrieved);
+          }}
+        >
+          {#if session?.paused}
+            <Play size="1.5rem" />
+          {:else}
+            <Pause size="1.5rem" />
+          {/if}
+        </Button>
+      </div>
+    {/await}
+  {/if}
 </div>
