@@ -29,7 +29,7 @@
       <p class="text-lg">Loading...</p>
     {:then session}
       <h2 class="text-5xl font-black">
-        {session?.remaining} minutes
+        {session?.remaining ? `${session?.remaining} minutes` : "Done!"}
       </h2>
 
       <i class="text-lg">{session?.work}</i>
