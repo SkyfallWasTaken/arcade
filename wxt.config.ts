@@ -6,5 +6,6 @@ export default defineConfig({
   modules: ["@wxt-dev/module-svelte"],
   manifest: {
     permissions: ["storage"],
+    host_permissions: ["https://hackhour.hackclub.com/*"],
   },
 });

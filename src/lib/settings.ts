@@ -10,4 +10,13 @@ const apiKey = asyncable(
   }
 );
 
-export { apiKey };
+const slackId = asyncable(
+  async () => {
+    return await storage.getItem<string>("local:slackId");
+  },
+  async (value: string) => {
+    await storage.setItem("local:slackId", value);
+  }
+);
+
+export { apiKey, slackId };

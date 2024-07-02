@@ -1,6 +1,3 @@
-import { writable } from "svelte/store";
-import { apiKey, apiKey } from "./settings";
-
 class ApiClient {
   private apiKey: string;
   rootPath = "https://hackhour.hackclub.com";
@@ -23,22 +20,42 @@ class ApiClient {
   }
 
   async getLatestUserSession(userId: string): Promise<Session> {
-    const response = await fetch(`${this.rootPath}/api/session/${userId}`);
+    const response = await fetch(`${this.rootPath}/api/session/${userId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.apiKey}`,
+      },
+    });
     return (await response.json()).data;
   }
 
   async getUserStats(userId: string): Promise<UserStats> {
-    const response = await fetch(`${this.rootPath}/api/stats/${userId}`);
+    const response = await fetch(`${this.rootPath}/api/stats/${userId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.apiKey}`,
+      },
+    });
     return (await response.json()).data;
   }
 
   async getUserGoals(userId: string): Promise<Goal[]> {
-    const response = await fetch(`${this.rootPath}/api/goals/${userId}`);
+    const response = await fetch(`${this.rootPath}/api/goals/${userId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.apiKey}`,
+      },
+    });
     return (await response.json()).data.goals;
   }
 
   async getUserHistory(userId: string): Promise<Session[]> {
-    const response = await fetch(`${this.rootPath}/api/history/${userId}`);
+    const response = await fetch(`${this.rootPath}/api/history/${userId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.apiKey}`,
+      },
+    });
     return (await response.json()).data;
   }
 
@@ -80,9 +97,7 @@ class ApiClient {
   }
 }
 
-const apiKeyRetrieved = await apiKey.get();
-const apiClient = writable(new ApiClient(apiKeyRetrieved));
-export default { apiClient };
+export { ApiClient };
 
 export interface SessionCrudInfo {
   id: string;
@@ -105,6 +120,8 @@ export interface Session {
   createdAt: string;
   time: number;
   elapsed: number;
+
+  /** Remaining **minutes** of session */
   remaining: number;
   endTime: string;
   goal: string;
